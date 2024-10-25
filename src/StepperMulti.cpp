@@ -1,20 +1,11 @@
 /*
- * Fork of original https://github.com/arduino-libraries/Stepper
- * to make several step motors run in protothreading
- * (c)2022 by Aleksandr.ru
- * @url http://aleksand.ru
- * 
- * ---
- * 
- * Stepper.cpp - Stepper library for Wiring/Arduino - Version 1.1.0
+ * StepperMulti.cpp - Protothread stepper library for Arduino - Version 1.0
  *
- * Original library        (0.1)   by Tom Igoe.
- * Two-wire modifications  (0.2)   by Sebastian Gassner
- * Combination version     (0.3)   by Tom Igoe and David Mellis
- * Bug fix for four-wire   (0.4)   by Tom Igoe, bug fix from Noah Shibley
- * High-speed stepping mod         by Eugene Kozlenko
- * Timer rollover fix              by Eugene Kozlenko
- * Five phase five wire    (1.1.0) by Ryan Orendorff
+ * Fork of Stepper Library for Arduino https://github.com/arduino-libraries/Stepper
+ * Aimed to make several step motors run asynchronously in protothreading
+ * (c)2022 by Aleksandr.ru
+ * @url http://aleksandr.ru
+ *
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -185,8 +176,8 @@ void StepperMulti::setSpeed(long whatSpeed)
 }
 
 /**
- * Start to move the motor in steps_to_move steps.  
- * 
+ * Start to move the motor in steps_to_move steps.
+ *
  * @param steps_to_move If the number is negative, the motor moves in the reverse direction.
  */
 void StepperMulti::start(int steps_to_move)
@@ -200,7 +191,7 @@ void StepperMulti::start(int steps_to_move)
 
 /**
  * Stop movement
- * 
+ *
  * @param free_motor Stop powering the motor
  */
 void StepperMulti::stop(bool free_motor = true)
@@ -210,12 +201,12 @@ void StepperMulti::stop(bool free_motor = true)
   if (free_motor) switch (this->pin_count) {
     case 5:
       digitalWrite(motor_pin_5, LOW);
-    case 4:      
+    case 4:
       digitalWrite(motor_pin_4, LOW);
       digitalWrite(motor_pin_3, LOW);
     case 2:
       digitalWrite(motor_pin_2, LOW);
-      digitalWrite(motor_pin_1, LOW);        
+      digitalWrite(motor_pin_1, LOW);
   }
 }
 
@@ -393,12 +384,4 @@ void StepperMulti::stepMotor(int thisStep)
         break;
     }
   }
-}
-
-/*
-  version() returns the version of the library:
-*/
-int StepperMulti::version(void)
-{
-  return 5;
 }

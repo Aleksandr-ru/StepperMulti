@@ -1,20 +1,11 @@
 /*
- * Fork of original https://github.com/arduino-libraries/Stepper
- * to make several step motors run in protothreading
- * (c)2022 by Aleksandr.ru
- * @url http://aleksand.ru
- * 
- * ---
- * 
- * Stepper.h - Stepper library for Wiring/Arduino - Version 1.1.0
+ * StepperMulti.h - Protothread stepper library for Arduino - Version 1.0
  *
- * Original library        (0.1)   by Tom Igoe.
- * Two-wire modifications  (0.2)   by Sebastian Gassner
- * Combination version     (0.3)   by Tom Igoe and David Mellis
- * Bug fix for four-wire   (0.4)   by Tom Igoe, bug fix from Noah Shibley
- * High-speed stepping mod         by Eugene Kozlenko
- * Timer rollover fix              by Eugene Kozlenko
- * Five phase five wire    (1.1.0) by Ryan Orendorff
+ * Fork of Stepper Library for Arduino https://github.com/arduino-libraries/Stepper
+ * Aimed to make several step motors run asynchronously in protothreading
+ * (c)2022 by Aleksandr.ru
+ * @url http://aleksandr.ru
+ *
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -104,9 +95,8 @@ class StepperMulti {
     void start(int number_of_steps);
     void stop(bool free_motor = true);
     void step();
-    bool isMoving();
 
-    int version(void);
+    bool isMoving();
 
   private:
     void stepMotor(int this_step);
@@ -129,4 +119,3 @@ class StepperMulti {
 };
 
 #endif
-

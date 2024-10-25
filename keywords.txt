@@ -4,4 +4,3 @@ start	KEYWORD2
 stop	KEYWORD2
 step	KEYWORD2
 isMoving	KEYWORD2
-version	KEYWORD2
