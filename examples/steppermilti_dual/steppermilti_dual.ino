@@ -6,23 +6,23 @@
  * @url http://aleksandr.ru
 */
 
-#define MOTORPIN11 6
-#define MOTORPIN12 7
-#define MOTORPIN13 8
-#define MOTORPIN14 9
+#define MOTOR1_PIN1 6
+#define MOTOR1_PIN2 7
+#define MOTOR1_PIN3 8
+#define MOTOR1_PIN4 9
 
-#define MOTORPIN21 A0
-#define MOTORPIN22 A1
-#define MOTORPIN23 A2
-#define MOTORPIN24 A3
+#define MOTOR2_PIN1 A0
+#define MOTOR2_PIN2 A1
+#define MOTOR2_PIN3 A2
+#define MOTOR2_PIN4 A3
 
-#define STEPS 450
-#define SPEED 30
+#define STEPS 450 // change this to the number of steps on your motor
+#define SPEED 30  // change this to desired speed of your motor
 
 #include <StepperMulti.h>
 
-StepperMulti myStepper1(STEPS, MOTORPIN11, MOTORPIN12, MOTORPIN13, MOTORPIN14);
-StepperMulti myStepper2(STEPS, MOTORPIN21, MOTORPIN22, MOTORPIN23, MOTORPIN24);
+StepperMulti myStepper1(STEPS, MOTOR1_PIN1, MOTOR1_PIN2, MOTOR1_PIN3, MOTOR1_PIN4);
+StepperMulti myStepper2(STEPS, MOTOR2_PIN1, MOTOR2_PIN2, MOTOR2_PIN3, MOTOR2_PIN4);
 
 int direction1 = 1;
 int direction2 = -1;
@@ -42,12 +42,14 @@ void loop()
 
     if (!myStepper1.isMoving()) {
         direction1 *= -1;
-        myStepper1.start(direction1 * STEPS);
-        Serial.println("Stepper 1 start");
+        myStepper1.start(direction1 * STEPS * 2);
+        Serial.print("Stepper 1 start: ");
+        Serial.println(direction1 > 0 ? "forwrd" : "backward");
     }
     else if (!myStepper2.isMoving()) {
         direction2 *= -1;
-        myStepper2.start(direction2 * STEPS);
-        Serial.println("Stepper 2 start");
+        myStepper2.start(direction2 * STEPS * 2);
+        Serial.print("Stepper 2 start: ");
+        Serial.println(direction2 > 0 ? "forwrd" : "backward");
     }
 }
