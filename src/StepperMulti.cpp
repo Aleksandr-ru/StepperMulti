@@ -1,5 +1,5 @@
 /*
- * StepperMulti.cpp - Protothread stepper library for Arduino - Version 1.0
+ * StepperMulti - Protothread stepper library for Arduino - Version 1.0
  *
  * Fork of Stepper Library for Arduino https://github.com/arduino-libraries/Stepper
  * Aimed to make several step motors run asynchronously in protothreading
