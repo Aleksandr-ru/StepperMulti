@@ -1,6 +1,7 @@
 /*
  * StepperMulti example
- * Async stepper control
+ * Async stepper control using MX1508 driver or similar
+ * To use this with DRV8833 or similar add code for "Enable" pins
  *
  * (c)2024 by Aleksandr.ru
  * @url http://aleksandr.ru
@@ -14,8 +15,8 @@
 #define MOTORPIN3 8
 #define MOTORPIN4 9
 
-#define STEPS 450 // change this to the number of steps on your motor
-#define SPEED 30  // change this to desired speed of your motor
+#define STEPS 450 // Change this to the number of steps on your motor
+#define SPEED 30  // Change this to desired speed of your motor
 
 #include <StepperMulti.h>
 
@@ -31,7 +32,6 @@ void setup()
     Serial.begin(9600);
 
     pinMode(LEDPIN, OUTPUT);
-    digitalWrite(LEDPIN, LOW);
 
     myStepper.setSpeed(SPEED);
 }
@@ -49,6 +49,15 @@ void loop()
     myStepper.step();
 
     if (!myStepper.isMoving()) {
+        // For MX1508 or similar driver
+        // stop() must be called when moving is complete
+        // to release motor pins and prevent overheating
+        myStepper.stop();
+
+        // Consider to add some time to cool down hardware
+        // but don't use delay() because it's blocking:
+        // delay(1000); // This will freeze flashing led
+
         direction *= -1;
         myStepper.start(direction * STEPS * 2);
         Serial.println("Stepper restart");
