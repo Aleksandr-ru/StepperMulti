@@ -54,7 +54,7 @@ void loop()
     myStepper2.step();
 
     // No need to debounce button input
-    // because when stepper in moving button takes no action
+    // because when stepper is moving button takes no action
     if (!myStepper1.isMoving() && !digitalRead(BUTTON1_PIN)) {
         direction1 *= -1;
         myStepper1.start(direction1 * STEPS * 2);
@@ -69,7 +69,7 @@ void loop()
     }
 
     // No need to debounce button input
-    // because when stepper in moving button takes no action
+    // because when stepper is moving button takes no action
     if (!myStepper2.isMoving() && !digitalRead(BUTTON2_PIN)) {
         direction2 *= -1;
         myStepper2.start(direction2 * STEPS * 2);
